@@ -28,7 +28,7 @@ func main() {
 	http.HandleFunc("/", getRoot)
 
 	fmt.Printf("🚀Server is up and running! \n")
-	err := http.ListenAndServe(":3333", nil)
+	err := http.ListenAndServe(":8080", nil)
 
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("server closed\n")
