@@ -12,14 +12,14 @@ import (
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Server received a request to %s \n", r.URL)
 
-	w.WriteHeader(http.StatusCreated)
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Add("Content-Type", "application/json")
 	resp := make(map[string]string)
 	resp["status"] = "OK"
 	jsonResp, err := json.Marshal(resp)
 	if err != nil {
 		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
 	}
+	fmt.Printf("Server respond with: %s \n", jsonResp)
 	w.Write(jsonResp)
 	return
 }
@@ -28,7 +28,7 @@ func main() {
 	http.HandleFunc("/", getRoot)
 
 	fmt.Printf("🚀Server is up and running! \n")
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":3333", nil)
 
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("server closed\n")
